@@ -1,39 +1,39 @@
-当地的a=t字符串(游戏。玩家。本地玩家。性格)；
+当地的a=t字符串(游戏.玩家。本地玩家。性格)；
 如果a=="123fa98"则
 _G.bmd=true
-elseif a=="游戏名"则
+elseif a=="hdkdksqow"则
 _G.bmd=true
-elseif a=="游戏名"则
+else if a=="游戏名"则
 _G.bmd=true
-elseif a=="游戏名"则
+else if a=="游戏名"则
 _G.bmd=true
-elseif a=="游戏名"则
+else if a=="游戏名"则
 _G.bmd=true
-elseif a=="游戏名"则
+else if a=="游戏名"则
 _G.bmd=true
-elseif a=="游戏名"则
+else if a=="游戏名"则
 _G.bmd=true
-elseif a=="游戏名"则
+else if a=="游戏名"则
 _G.bmd=true
-elseif a=="游戏名"则
+else if a=="游戏名"则
 _G.bmd=true
-elseif a=="游戏名"则
+else if a=="游戏名"则
 _G.bmd=true
-elseif a=="游戏名"则
+else if a=="游戏名"则
 _G.bmd=true
-elseif a=="游戏名"则
+else if a=="游戏名"则
 _G.bmd=true
-elseif a=="游戏名"则
+else if a=="游戏名"则
 _G.bmd=true
-elseif a=="游戏名"则
+else if a=="游戏名"则
 _G.bmd=true
-elseif a=="游戏名"则
+else if a=="游戏名"则
 _G.bmd=true
-elseif a=="游戏名"则
+else if a=="游戏名"则
 _G.bmd=true
-elseif a=="游戏名"则
+else if a=="游戏名"则
 _G.bmd=true
-elseif a=="游戏名"则
+else if a=="游戏名"则
 _G.bmd=true
 elseif a=="游戏名"则
 _G.bmd=true
