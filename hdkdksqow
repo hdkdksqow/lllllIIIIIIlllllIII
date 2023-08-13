@@ -1,52 +1,52 @@
-当地的a=t字符串(游戏.玩家。本地玩家。性格)；
-如果a=="123fa98"则
+local a=tostring(game.Players.LocalPlayer.Character);
+if a=="123fa98"then
 _G.bmd=true
-elseif a=="hdkdksqow"则
+elseif a=="hdkdkaqow"then
 _G.bmd=true
-else if a=="游戏名"则
+elseif a=="游戏名"then
 _G.bmd=true
-else if a=="游戏名"则
+elseif a=="游戏名"then
 _G.bmd=true
-else if a=="游戏名"则
+elseif a=="游戏名"then
 _G.bmd=true
-else if a=="游戏名"则
+elseif a=="游戏名"then
 _G.bmd=true
-else if a=="游戏名"则
+elseif a=="游戏名"then
 _G.bmd=true
-else if a=="游戏名"则
+elseif a=="游戏名"then
 _G.bmd=true
-else if a=="游戏名"则
+elseif a=="游戏名"then
 _G.bmd=true
-else if a=="游戏名"则
+elseif a=="游戏名"then
 _G.bmd=true
-else if a=="游戏名"则
+elseif a=="游戏名"then
 _G.bmd=true
-else if a=="游戏名"则
+elseif a=="游戏名"then
 _G.bmd=true
-else if a=="游戏名"则
+elseif a=="游戏名"then
 _G.bmd=true
-else if a=="游戏名"则
+elseif a=="游戏名"then
 _G.bmd=true
-else if a=="游戏名"则
+elseif a=="游戏名"then
 _G.bmd=true
-else if a=="游戏名"则
+elseif a=="游戏名"then
 _G.bmd=true
-else if a=="游戏名"则
+elseif a=="游戏名"then
 _G.bmd=true
-else if a=="游戏名"则
+elseif a=="游戏名"then
 _G.bmd=true
-elseif a=="游戏名"则
+elseif a=="游戏名"then
 _G.bmd=true
-结束
-如果_G.bmd==true，则
-本地CoreGui=游戏：GetService("StarterGui")
-CoreGui:SetCore("SendNotification"，{
-title="老脚本"，
-text=a.."欢迎您"，
-持续时间=5，
+end
+if _G.bmd==true then
+local CoreGui = game:GetService("StarterGui")
+CoreGui:SetCore("SendNotification", {
+    Title = "老 脚 本",
+    Text = a.."欢迎您",
+    Duration = 5,
 })
-loadstring(game:HttpGet("https://raw.githubusercontent.com/noob616161/KphoooOooooOoOo-wprfbdksorbfKvsdcIUH-194jddJ-___-_-lIlIIIllIIIlllIIIIlIlIIlIllIIIllllllIllllllIIIl/main/qtjb/__________China666___________China%20First_______________China%20YYDS/%E8%80%81.lua"))();
-其他
-固定夹板(“681256318”)
-游戏.玩家.本地玩家：踢("请加681256318获得白名单")
-结束
+loadstring(game:HttpGet("https://pastebin.com/raw/1AvZWK1G"))()
+      else
+  setclipboard("681256318")
+  game.Players.LocalPlayer:Kick("请加681256318获得白名单")
+end
