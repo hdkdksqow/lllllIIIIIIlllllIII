@@ -45,7 +45,7 @@ CoreGui:SetCore("SendNotification", {
     Text = a.."欢迎您",
     Duration = 5,
 })
-loadstring(game:HttpGet("https://pastebin.com/raw/1AvZWK1G"))()
+loadstring(game:HttpGet("https://pastebin.com/raw/aq6r9emC"))()
       else
   setclipboard("681256318")
   game.Players.LocalPlayer:Kick("请加681256318获得白名单")
