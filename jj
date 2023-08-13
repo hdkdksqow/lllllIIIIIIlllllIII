@@ -1,0 +1,52 @@
+当地的a=t字符串(游戏。玩家。本地玩家。性格)；
+如果a=="123fa98"则
+_G.bmd=true
+否则，如果a=="hdkdkaqow"，则
+_G.bmd=true
+elseif a=="游戏名"则
+_G.bmd=true
+elseif a=="游戏名"则
+_G.bmd=true
+elseif a=="游戏名"则
+_G.bmd=true
+elseif a=="游戏名"则
+_G.bmd=true
+elseif a=="游戏名"则
+_G.bmd=true
+elseif a=="游戏名"则
+_G.bmd=true
+elseif a=="游戏名"则
+_G.bmd=true
+elseif a=="游戏名"则
+_G.bmd=true
+elseif a=="游戏名"则
+_G.bmd=true
+elseif a=="游戏名"则
+_G.bmd=true
+elseif a=="游戏名"则
+_G.bmd=true
+elseif a=="游戏名"则
+_G.bmd=true
+elseif a=="游戏名"则
+_G.bmd=true
+elseif a=="游戏名"则
+_G.bmd=true
+elseif a=="游戏名"则
+_G.bmd=true
+elseif a=="游戏名"则
+_G.bmd=true
+elseif a=="游戏名"则
+_G.bmd=true
+结束
+如果_G.bmd==true，则
+本地CoreGui=游戏：GetService("StarterGui")
+CoreGui:SetCore("SendNotification"，{
+title="老脚本"，
+text=a.."欢迎您"，
+持续时间=5，
+})
+loadstring(游戏：HttpGet("https://pastebin.com/raw/1AvZWK1G"))()
+其他
+固定夹板(“681256318”)
+游戏.玩家.本地玩家：踢("请加681256318获得白名单")
+结束
