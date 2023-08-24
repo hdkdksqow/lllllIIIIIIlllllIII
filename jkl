@@ -261,6 +261,28 @@ Tab:AddTextbox({
     end
       })   
 
+Tab:AddButton({
+  Name = "甩飞别人",
+  Callback = function()
+      loadstring(game:HttpGet("https://pastebin.com/raw/GnvPVBEi"))()
+  end
+  })
+  
+  
+Tab:AddButton({
+	Name = "转起来",
+	Callback = function()
+      	loadstring(game:HttpGet('https://pastebin.com/raw/r97d7dS0', true))()
+  	end
+})
+
+Tab:AddButton({
+	Name = "隐身弹人",
+	Callback = function()
+     loadstring(game:HttpGet("https://pastebin.com/raw/kenX0BHc"))()
+  	end
+})
+
       local Tab = Window:MakeTab({
 	Name = "极速传奇",
 	Icon = "rbxassetid://7734068321",
@@ -446,9 +468,28 @@ Tab:AddButton({
 })
 
 Tab:AddButton({
-	Name = "工具包",
+  Name = "工具包（可破别人团队模式空气墙）",
+  Callback = function()
+      loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/BTools.txt"))()	
+  end
+  })
+  
+  Tab:AddButton({
+  Name = "飞行装备（可控制物体）",
+  Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/PSXhuge/1/main/feixing"))()		
+  end
+  })
+  
+  Tab:AddButton({
+	Name = "防止掉线（反挂机）",
 	Callback = function()
-	loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/BTools.txt"))()	
+	print("Anti Afk On")
+		local vu = game:GetService("VirtualUser")
+		game:GetService("Players").LocalPlayer.Idled:connect(function()
+		   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+		   wait(1)
+		   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)		end)
   	end
 })
 
