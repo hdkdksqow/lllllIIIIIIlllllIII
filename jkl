@@ -157,18 +157,7 @@ Tab:AddButton({
   end
   })
 
-  local Tab = Window:MakeTab({
-	Name = "基础功能",
-	Icon = "rbxassetid://7734068321",
-	PremiumOnly = false
-})
 
-Tab:AddButton({
-	Name = "绘制透视名字显示",
-	Callback = function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/cbhlyy/lyycbh/main/tou"))()
-  	end
-})
 
   local Tab = Window:MakeTab({
 	Name = "基础功能",
