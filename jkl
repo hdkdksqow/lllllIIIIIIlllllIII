@@ -1172,4 +1172,33 @@ Tab:AddButton({
 	loadstring(game:httpget("https://raw.githubusercontent.com/LabibKazi858/Scripts/main/Restaurant%20Tycoon%202", true))()
 	end
 })
+ local Tab = Window:MakeTab({
+	Name = "一路向西",
+	Icon = "rbxassetid://13519683179",
+	PremiumOnly = false
+})
+Tab:AddButton({
+	Name = "防摔",
+	Callback = function()
+	loadstring(game:GetObjects("rbxassetid://10040712770")[1].Source)()
+	end
+})
+Tab:AddButton({
+	Name = "防套",
+	Callback = function()
+	loadstring(game:GetObjects("rbxassetid://10040719318")[1].Source)()
+	end
+})
+Tab:AddButton({
+	Name = "范围",
+	Callback = function()
+	loadstring(game:GetObjects("rbxassetid://10040722920")[1].Source)()
+	end
+})
+Tab:AddButton({
+	Name = "无后座，无限，超级",
+	Callback = function()
+	loadstring(game:GetObjects("rbxassetid://10040701935")[1].Source)()
+	end
+})
 OrionLib:Init()
