@@ -26,7 +26,7 @@ Title.BorderSizePixel = 2
 Title.Position = UDim2.new(0, 0, 0.02, 0)
 Title.Size = UDim2.new(1, 0, 0, 50)
 Title.Font = Enum.Font.SourceSans
-Title.Text = "没卡密别想玩"
+Title.Text = "老卡密"
 Title.TextColor3 = Color3.new(0, 0, 255)
 Title.TextScaled = true
 Title.TextSize = 14
@@ -67,7 +67,7 @@ Start.TextSize = 10
 Start.TextWrapped = true
 
 Start.MouseButton1Click:Connect(function()
-    if Key.Text == "sb" then
+    if Key.Text == "之前nb" then
         ScreenGui:Destroy()
 loadstring(game:HttpGet("https://pastebin.com/raw/6xQ5gtbj"))();--北京时间
 local OrionLib = loadstring(game:HttpGet("https://pastebin.com/raw/FUEx0f3G"))()--UI
