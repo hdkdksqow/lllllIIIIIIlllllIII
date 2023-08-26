@@ -95,6 +95,13 @@ Name = "doors",
 })
 
 Tab:AddButton({
+  Name = "老doors好用",
+  Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/hdkdksqow/lllllIIIIIIlllllIII/main/doors"))();  
+  end
+  })
+  
+Tab:AddButton({
 	Name = "物品复制枪",
 	Callback = function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/MrNeRD0/Doors-Hack/main/EverythingGunByNeRD.lua"))()
