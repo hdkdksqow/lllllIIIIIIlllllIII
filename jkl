@@ -1346,6 +1346,20 @@ Tab:AddButton({
       loadstring(game:HttpGet('https://raw.githubusercontent.com/jynzl/main/main/Musclas%20Legenos.lua'))()
   end
 })
+
+local Tab = Window:MakeTab({
+Name = "兵工厂",
+	Icon = "rbxassetid://7734068321",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+  Name = "老脚本兵工厂（太长了。所以单独压缩）",
+  Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/noob616161/ljb/main/%E8%80%81.lua"))();
+  end
+  })
+  
 OrionLib:Init()
    else
         game.Players.LocalPlayer:Kick("卡密错误去加作者QQ1210438403")
