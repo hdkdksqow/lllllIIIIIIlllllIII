@@ -1272,8 +1272,85 @@ Tab:AddButton({
 	loadstring(game:GetObjects("rbxassetid://10040701935")[1].Source)()
 	end
 })
+
+
+local Tab = Window:MakeTab({
+	Name = "力量传奇",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+ 
+local Section = Tab:AddSection({
+	Name = "力量传奇"
+})
+ 
+Tab:AddButton({
+	Name = "传送到出生点",
+	Callback = function()
+      		      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(7, 3, 108)
+  	end    
+})
+ 
+Tab:AddButton({
+	Name = "传送到冰霜健身房",
+	Callback = function()
+      		      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2543, 13, -410)
+  	end    
+})
+ 
+Tab:AddButton({
+	Name = "传送到神话健身房",
+	Callback = function()
+      		      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2177, 13, 1070)
+  	end    
+})
+ 
+Tab:AddButton({
+	Name = "传送到永恒健身房",
+	Callback = function()
+      		      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-6686, 13, -1284)
+  	end    
+})
+ 
+Tab:AddButton({
+	Name = "传送到传说健身房",
+	Callback = function()
+      		      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(4676, 997, -3915)
+  	end    
+})
+ 
+Tab:AddButton({
+	Name = "传送到肌肉之王健身房",
+	Callback = function()
+      		      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-8554, 22, -5642)
+  	end    
+})
+ 
+Tab:AddButton({
+	Name = "传送到安全岛",
+	Callback = function()
+      		      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-39, 10, 1838)
+  	end    
+})
+ 
+Tab:AddButton({
+	Name = "传送到幸运抽奖区域",
+	Callback = function()
+      		      		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2606, -2, 5753)
+  	end    
+})
+
+Tab:AddButton({
+  Name = "修改力量（自己翻译）",
+  Callback = function()
+      loadstring(game:HttpGet('https://raw.githubusercontent.com/jynzl/main/main/Musclas%20Legenos.lua'))()
+  end
+})
 OrionLib:Init()
    else
         game.Players.LocalPlayer:Kick("卡密错误去加作者QQ1210438403")
     end
 end)
+
+
+ 
