@@ -1274,6 +1274,6 @@ Tab:AddButton({
 })
 OrionLib:Init()
    else
-        game.Players.LocalPlayer:Kick("卡密错误去加作者QQ之前喵")
+        game.Players.LocalPlayer:Kick("卡密错误去加作者QQ1210438403")
     end
 end)
