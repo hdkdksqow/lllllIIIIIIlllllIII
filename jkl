@@ -965,98 +965,12 @@ Tab:AddButton({
     })
     
      Tab:AddButton({
-      Name = "忍脚本 -- 伐木大亨2(123fa98提供)",
-      Callback = function()
-      loadstring("\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\34\104\116\116\112\115\58\47\47\112\97\115\116\101\98\105\110\46\99\111\109\47\114\97\119\47\101\121\77\117\74\68\50\52\34\41\41\40\41\59\10")()
-      end
-      })   
-       
-           Tab:AddButton({
-      Name = "bark2.0(123fa98提供)",
-      Callback = function()
-       loadstring(game:HttpGet(utf8.char((function() return table.unpack({104,116,116,112,115,58,47,47,114,97,119,46,103,105,116,104,117,98,117,115,101,114,99,111,110,116,101,110,116,46,99,111,109,47,110,111,111,98,54,49,54,49,54,49,47,82,79,66,76,79,88,47,109,97,105,110,47,98,97,114,107,50,46,48,46,108,117,97})end)())))();     
-      end
-      })         
-                      
-    
-         Tab:AddButton({
-      Name = "忍脚本 -- 伐木大亨2(盗版浮光掠影)(123fa98提供)",
-      Callback = function()
-      loadstring(game:HttpGet(utf8.char((function() return table.unpack({104,116,116,112,115,58,47,47,112,97,115,116,101,98,105,110,46,99,111,109,47,114,97,119,47,98,51,115,84,68,86,112,116})end)())))();
-      end
-      })   
-      
-         Tab:AddButton({
-      Name = "白脚本伐木大亨2[免费](已修复)(123fa98提供)",
-      Callback = function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/noob616161/KphoooOooooOoOo-wprfbdksorbfKvsdcIUH-194jddJ-___-_-lIlIIIllIIIlllIIIIlIlIIlIllIIIllllllIllllllIIIl/main/bai/%E4%BC%90%E6%9C%A8"))();
-      end
-      })   
-    
-      Tab:AddButton({
-      Name = "伐木大亨2多功能",
-      Callback = function()
-      loadstring(game:HttpGet('https://raw.githubusercontent.com/Butterisgood/butter-hub/main/Butterhub.txt'))()
-      end
-      })   
-
-local Section = Tab:AddSection({
-	Name = "传送地点"
-})          
-      
-      Tab:AddButton({
-      Name = "火木",
-      Callback = function()
-      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1615.8934326171875, 622.9998779296875, 1086.1234130859375)
-      end
-      })
-      
-      Tab:AddButton({
-      Name = "画室",
-      Callback = function()
-      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(5241.55810546875, -166.00003051757812, 709.5656127929688)
-      end
-      })      
-      
-      Tab:AddButton({
-      Name = "幻影木",
-      Callback = function()
-      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-56.28166198730469, -213.13137817382812, -1357.8018798828125)
-      end
-      })
-
-      Tab:AddButton({
-      Name = "木材反斗城",
-      Callback = function()
-      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(252.31906127929688, 2.9999992847442627, 56.9854850769043)
-      end
-      })                             
-       
-      Tab:AddButton({
-      Name = "冰木",
-      Callback = function()
-      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1522.8817138671875, 412.3657531738281, 3277.71826171875)                                                                      
-      end
-      })  
-      
-      Tab:AddButton({
-      Name = "椰子木",
-      Callback = function()
-      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(2615.709228515625, -5.899986743927002, -21.30138397216797)                                                                      
-      end
-      })  
-
-
-
-
-
-
-
-
-
-
-
-
+  Name = "老伐木",
+  Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/hdkdksqow/lllllIIIIIIlllllIII/main/%E4%BC%90%E6%9C%A8"))();
+  end
+  })
+                
     local Tab = Window:MakeTab({
 	Name = "脚本中心",
 	Icon = "rbxassetid://7734068321",
