@@ -1359,6 +1359,20 @@ Tab:AddButton({
       loadstring(game:HttpGet("https://raw.githubusercontent.com/noob616161/ljb/main/%E8%80%81.lua"))();
   end
   })
+
+
+local Tab = Window:MakeTab({
+Name = "巴掌",
+	Icon = "rbxassetid://7734068321",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+  Name = "老巴掌",
+  Callback = function()
+     loadstring(game:HttpGet(" https://pastebin.com/raw/BuxkqJfT"))();
+  end
+  })
   
 OrionLib:Init()
    else
