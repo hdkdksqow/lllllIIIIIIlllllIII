@@ -1307,6 +1307,19 @@ Tab:AddButton({
 loadstring(game:HttpGet("https://raw.githubusercontent.com/noob616161/ljb/main/%E8%80%812.lua"))();
   end
   })
+
+local Tab = Window:MakeTab({
+Name = "rc",
+	Icon = "rbxassetid://7734068321",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+  Name = "老rc",
+  Callback = function()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/hdkdksqow/lllllIIIIIIlllllIII/main/rc"))();
+  end
+  })
   
 OrionLib:Init()
    else
