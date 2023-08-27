@@ -271,7 +271,7 @@ end);
 end 
 end 
 local v12=loadstring(game:HttpGet("https://pastebin.com/raw/qqT4Ek4t"))();
-local v28=v12:MakeWindow({Name="老--rc",HidePremium=false,SaveConfig=true,IntroEnabled=true,IntroText="欢迎使用狐脚本"});
+local v28=v12:MakeWindow({Name="老rc",HidePremium=false,SaveConfig=true,IntroEnabled=true,IntroText="欢迎使用老rc"});
 local v29=v28:MakeTab({Name="人物功能",Icon="rbxassetid://4483345998",PremiumOnly=false});
 local v30=v28:MakeTab({Name="主要功能1",Icon="rbxassetid://4483345998",PremiumOnly=false});
 local v31=v28:MakeTab({Name="传送",Icon="rbxassetid://4483345998",PremiumOnly=false});
