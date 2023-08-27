@@ -1294,6 +1294,19 @@ Tab:AddButton({
      loadstring(game:HttpGet("https://raw.githubusercontent.com/hdkdksqow/lllllIIIIIIlllllIII/main/%E5%B7%B4%E6%8E%8C"))();
   end
   })
+
+local Tab = Window:MakeTab({
+Name = "蜂群",
+	Icon = "rbxassetid://7734068321",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+  Name = "老蜂群",
+  Callback = function()
+     loadstring(game:HttpGet("https://raw.githubusercontent.com/hdkdksqow/lllllIIIIIIlllllIII/main/%E8%9C%82%E7%BE%A4"))(); 
+  end
+  })
   
 OrionLib:Init()
    else
