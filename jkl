@@ -1304,7 +1304,7 @@ Name = "蜂群",
 Tab:AddButton({
   Name = "老蜂群",
   Callback = function()
-     loadstring(game:HttpGet("https://raw.githubusercontent.com/hdkdksqow/lllllIIIIIIlllllIII/main/%E8%9C%82%E7%BE%A4"))(); 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/noob616161/ljb/main/%E8%80%812.lua"))();
   end
   })
   
