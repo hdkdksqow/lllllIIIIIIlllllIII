@@ -12,11 +12,11 @@ local OrionLib = {
 	Flags = {},
 	Themes = {
 		Default = {
-			Main = Color3.fromRGB(#222222),
-			Second = Color3.fromRGB(#85FD81),
+			Main = Color3.fromRGB(19, 19, 19),
+			Second = Color3.fromRGB(253, 96, 3),
 			Stroke = Color3.fromRGB(60, 60, 60),
 			Divider = Color3.fromRGB(60, 60, 60),
-			Text = Color3.fromRGB(#85FD81),
+			Text = Color3.fromRGB(252, 252, 252),
 			TextDark = Color3.fromRGB(150, 150, 150)
 		}
 	},
@@ -382,8 +382,8 @@ local NotificationHolder = SetProps(SetChildren(MakeElement("TFrame"), {
 }), {
 	Position = UDim2.new(1, -25, 1, -25),
 	Size = UDim2.new(0, 300, 1, -25),
-	AnchorPoint = Vector2.new(1, 1),
-		Parent = Orion
+	AnchorPoint = Vector2..new(1, 1),
+	Parent = Orion
 })
 
 function OrionLib:MakeNotification(NotificationConfig)
@@ -662,7 +662,7 @@ function OrionLib:MakeWindow(WindowConfig)
 			WindowTopBarLine.Visible = false
 			MinimizeBtn.Ico.Image = "rbxassetid://7072720870"
 
-			TweenService:Create(MainWindow, TweenInfo.new(0.5, Enum.EasingStyle..Quint, Enum.EasingDirection.Out), {Size = UDim2.new(0, WindowName.TextBounds.X + 140, 0, 50)}):Play()
+			TweenService:Create(MainWindow, TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Size = UDim2.new(0, WindowName.TextBounds.X + 140, 0, 50)}):Play()
 			wait(0.1)
 			WindowStuff.Visible = false	
 		end
@@ -1145,7 +1145,7 @@ function OrionLib:MakeWindow(WindowConfig)
 					MakeElement("Corner")
 				}), "Second")
 
-				AddConnection(DropdownList:GetPropertyChangedSignal("AbsoluteContentSize"), functi()
+				AddConnection(DropdownList:GetPropertyChangedSignal("AbsoluteContentSize"), function()
 					DropdownContainer.CanvasSize = UDim2.new(0, 0, 0, DropdownList.AbsoluteContentSize.Y)
 				end)  
 
