@@ -977,7 +977,14 @@ Tab:AddButton({
       loadstring(game:HttpGet("https://raw.githubusercontent.com/hdkdksqow/lllllIIIIIIlllllIII/main/%E4%BC%90%E6%9C%A8"))();
   end
   })
-                
+      
+      Tab:AddButton({
+  Name = "老伐木，这个更好用",
+  Callback = function()
+   loadstring(game:HttpGet("https://pastebin.com/raw/z6jzw04P"))();   
+  end
+  })
+  
     local Tab = Window:MakeTab({
 	Name = "脚本中心",
 	Icon = "rbxassetid://7734068321",
@@ -1320,7 +1327,7 @@ Tab:AddButton({
       loadstring(game:HttpGet("https://raw.githubusercontent.com/hdkdksqow/lllllIIIIIIlllllIII/main/rc"))();
   end
   })
-  
+
 OrionLib:Init()
    else
         game.Players.LocalPlayer:Kick("卡密错误去加作者QQ1210438403")
