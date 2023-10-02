@@ -1,0 +1,1242 @@
+
+        
+local UserInputService = game:GetService("UserInputService")
+
+local function CreateGUI(title)
+    local gui = Instance.new("ScreenGui")
+    gui.Name = "MyGUI"
+    gui.ResetOnSpawn = false
+    gui.DisplayOrder = 10
+    gui.Parent = game.Players.LocalPlayer.PlayerGui
+    local frame = Instance.new("Frame")
+    frame.Name = "MainFrame"
+    frame.BackgroundTransparency = 0
+    frame.BackgroundColor3 = Color3.fromRGB(240, 248, 255)
+    frame.BorderSizePixel = 0
+    frame.Position = UDim2.new(0, 110, 0, -20) 
+    frame.Size = UDim2.new(0, 500, 0, 280)
+    frame.Parent = gui
+
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 10)
+    corner.Parent = frame
+
+    local dragging = false
+    local startPos, startOffset
+
+    frame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            startPos = input.Position
+                    startOffset = frame.Position
+            gui.Active = true 
+        end
+    end)
+
+    frame.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = false
+            startPos = nil
+            startOffset = nil
+            gui.Active = false
+        end
+    end)
+
+    UserInputService.InputChanged:Connect(function(input)
+        if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+            local delta = input.Position - startPos
+            frame.Position = UDim2.new(startOffset.X.Scale, startOffset.X.Offset + delta.X, startOffset.Y.Scale,  
+                startOffset.Y.Offset + delta.Y)
+        end
+    end)
+    local titleLabel = Instance.new("TextLabel")
+    titleLabel.Name = "TitleLabel"
+    titleLabel.Size = UDim2.new(1, 0, 0.05, 0.15 * frame.Size.Y.Offset)
+    titleLabel.Position = UDim2.new(0, 0, 0.01, 0)
+    titleLabel.BackgroundTransparency = 1
+    titleLabel.Text = title
+    titleLabel.TextColor3 = Color3.new(0, 0, 0)
+    titleLabel.TextSize = math.floor(frame.Size.Y.Offset * 0.1)
+    titleLabel.Parent = frame
+    local disagreeButton = Instance.new("TextButton")
+    disagreeButton.Name = "DisagreeButton"
+    disagreeButton.Size = UDim2.new(0, 0.4 * frame.Size.X.Offset, 0, 0.15 * frame.Size.Y.Offset)
+    disagreeButton.Position = UDim2.new(0, 0.1 * frame.Size.X.Offset, 0,
+        frame.Size.Y.Offset - 0.25 * frame.Size.Y.Offset)
+    disagreeButton.BackgroundTransparency = 0
+    disagreeButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    disagreeButton.Text = "不同意"
+    disagreeButton.TextColor3 = Color3.new(255, 0, 0)
+    disagreeButton.TextSize = math.floor(frame.Size.Y.Offset * 0.08)
+    disagreeButton.Font = Enum.Font.SourceSans
+    disagreeButton.Parent = frame
+    local disagreeCorner = Instance.new("UICorner")
+    disagreeCorner.CornerRadius = UDim.new(0, 10)
+    disagreeCorner.Parent = disagreeButton
+
+    local agreeButton = Instance.new("TextButton")
+    agreeButton.Name = "AgreeButton"
+    agreeButton.Size = UDim2.new(0, 0.4 * frame.Size.X.Offset, 0, 0.15 * frame.Size.Y.Offset)
+    agreeButton.Position = UDim2.new(0, frame.Size.X.Offset - 0.5 * frame.Size.X.Offset, 0,
+        frame.Size.Y.Offset - 0.25 * frame.Size.Y.Offset)
+    agreeButton.BackgroundTransparency = 0
+    agreeButton.BackgroundColor3 = Color3.fromRGB(106, 159, 255)
+    agreeButton.Text = "同意"
+    agreeButton.TextColor3 = Color3.new(255, 255, 255)
+    agreeButton.TextSize = math.floor(frame.Size.Y.Offset * 0.08)
+    agreeButton.Font = Enum.Font.SourceSans 
+    agreeButton.Parent = frame
+
+    
+    local agreeFrame = Instance.new("TextLabel")
+    agreeFrame.Size = UDim2.new(0.8, 0, 0.5, 0)
+    agreeFrame.Position = UDim2.new(0.1, 0, 0.22, 0)
+    agreeFrame.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
+    agreeFrame.Text = "1.脚本永久免费（可能要钱，因为有的时候缺钱🤓）"
+    agreeFrame.TextWrapped = true
+
+    
+    agreeFrame.TextSize = 16  
+
+
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 10)
+    corner.Parent = agreeFrame
+
+    agreeFrame.Parent = frame
+
+    local agreeCorner = Instance.new("UICorner")
+    agreeCorner.CornerRadius = UDim.new(0, 10)
+    agreeCorner.Parent = agreeButton
+    local minimizeButton = Instance.new("TextButton")
+    minimizeButton.Name = "MinimizeButton"
+    minimizeButton.Size = UDim2.new(0, 40, 0, 40)
+    minimizeButton.Position = UDim2.new(1, -65, 0, 10)
+    minimizeButton.BackgroundTransparency = 0
+    minimizeButton.BackgroundColor3 = Color3.fromRGB(199, 199, 199)
+    minimizeButton.Text = "-"
+    minimizeButton.TextSize = 28  
+    minimizeButton.TextColor3 = Color3.new(0, 0, 0)
+    minimizeButton.Font = Enum.Font.SourceSans
+    minimizeButton.Parent = frame
+
+    local isMinimized = false
+
+    local minimizeCorner = Instance.new("UICorner")
+    minimizeCorner.CornerRadius = UDim.new(0, 5)
+    minimizeCorner.Parent = minimizeButton
+
+    minimizeButton.MouseButton1Click:Connect(function()
+        if isMinimized then
+            frame.Size = UDim2.new(0, 500, 0, 280)
+            titleLabel.Position = UDim2.new(0, 0, 0.01, 0)
+            minimizeButton.Text = "-"
+            minimizeButton.TextSize = 28
+            isMinimized = false
+            disagreeButton.Visible = true
+            agreeButton.Visible = true
+            agreeFrame.Visible = true
+        else
+            frame.Size = UDim2.new(0, 500, 0, 60)
+            titleLabel.Position = UDim2.new(0, 0, 0, 0)
+            minimizeButton.Text = "+"
+            minimizeButton.TextSize = 28 
+            isMinimized = true
+            disagreeButton.Visible = false
+            agreeButton.Visible = false
+            agreeFrame.Visible = false
+        end
+    end)
+
+    local function AnimateExit()
+        local duration = 1
+        local startTime = tick()
+        local initialSize = frame.Size
+        while (tick() - startTime) < duration do
+            local elapsedTime = tick() - startTime
+            local scale = 1 - elapsedTime / duration
+            frame.Size = UDim2.new(initialSize.X.Scale * scale, initialSize.X.Offset * scale,
+                initialSize.Y.Scale * scale, initialSize.Y.Offset * scale)
+            frame.Position = frame.Position + UDim2.new((1 - scale) / 2, 0, (1 - scale) / 2, 0)
+            wait()
+        end
+        gui:Destroy()
+    end
+    disagreeButton.MouseButton1Click:Connect(function()
+        AnimateExit()
+    end)
+    agreeButton.MouseButton1Click:Connect(function()
+        AnimateExit()
+  
+  local ScreenGui = Instance.new("ScreenGui")
+local UI = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local Frame = Instance.new("Frame")
+local Key = Instance.new("TextBox")
+local Start = Instance.new("TextButton")
+
+ScreenGui.Parent = game.CoreGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+local ScreenGui1 = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local UICorner1 = Instance.new("UICorner")
+local TextLabel1 = Instance.new("TextLabel")
+local UICorner2 = Instance.new("UICorner")
+local TextLabel2 = Instance.new("TextLabel")
+local UICorner3 = Instance.new("UICorner")
+local ImageLabel = Instance.new("ImageLabel")
+local ScreenGui2 = Instance.new("ScreenGui")
+local TextLabel3 = Instance.new("TextLabel")
+local ScreenGui2 = Instance.new("ScreenGui")
+local TextLabel3 = Instance.new("TextLabel")
+local ScreenGui3 = Instance.new("ScreenGui")
+local TextLabel4 = Instance.new("TextLabel")
+local notification = Instance.new("ScreenGui")
+local Popup = Instance.new("Frame")
+local UIListLayout = Instance.new("UIListLayout")
+local notification2 = Instance.new("TextLabel")
+local UIGradient = Instance.new("UIGradient")
+local UICorner = Instance.new("UICorner")
+---------------------------------------
+ScreenGui1.Parent = game.CoreGui
+ScreenGui1.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = ScreenGui1
+Frame.BackgroundColor3 = Color3.fromRGB(0,0,0)
+Frame.Position = UDim2.new(-1.448, 0,0.065, 0)
+Frame.Size = UDim2.new(0.275353014, 0, 0.820448875, 0)
+
+UICorner1.CornerRadius = UDim.new(0, 30)
+UICorner1.Parent = Frame
+
+TextLabel1.Parent = Frame
+TextLabel1.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel1.BackgroundTransparency = 1.000
+TextLabel1.Size = UDim2.new(1, 0, 0.705167174, 0)
+TextLabel1.Font = Enum.Font.Michroma
+TextLabel1.Text = "老脚本"
+TextLabel1.TextColor3 = Color3.fromRGB(0, 255, 255)
+TextLabel1.TextScaled = true
+TextLabel1.TextSize = 14.000
+TextLabel1.TextWrapped = true
+
+UICorner2.CornerRadius = UDim.new(0, 30)
+UICorner2.Parent = TextLabel1
+
+TextLabel2.Parent = Frame
+TextLabel2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel2.BackgroundTransparency = 1.000
+TextLabel2.Position = UDim2.new(0, 0, 0.705167174, 0)
+TextLabel2.Size = UDim2.new(1, 0, 0.294832826, 0)
+TextLabel2.Font = Enum.Font.Michroma
+TextLabel2.Text = "老脚本nb"
+TextLabel2.TextColor3 = Color3.fromRGB(255, 255, 0)
+TextLabel2.TextScaled = true
+TextLabel2.TextSize = 14.000
+TextLabel2.TextWrapped = true
+
+UICorner3.CornerRadius = UDim.new(0, 30)
+UICorner3.Parent = TextLabel2
+
+ImageLabel.Parent = Frame
+ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImageLabel.BackgroundTransparency = 1.000
+ImageLabel.Position = UDim2.new(0.0842586756, 0, 0.408814579, 0)
+ImageLabel.Size = UDim2.new(0.703620017, 0, 0.227963522, 0)
+ImageLabel.Image = "rbxassetid://14904708387"
+
+ScreenGui2.Name = "ScreenGui2"
+ScreenGui2.Parent = game.CoreGui
+ScreenGui2.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+TextLabel3.Name = "TextLabel3"
+TextLabel3.Parent = ScreenGui2
+TextLabel3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel3.BackgroundTransparency = 1.000
+TextLabel3.Position = UDim2.new(-1.448, 0,0.255, 0)
+TextLabel3.Size = UDim2.new(0.51219511, 0, 0.28553617, 0)
+TextLabel3.Font = Enum.Font.SourceSans
+TextLabel3.Text = "您的注入器是: "..identifyexecutor()
+TextLabel3.TextColor3 = Color3.fromRGB(255, 0, 0)
+TextLabel3.TextScaled = true
+TextLabel3.TextSize = 14.000
+TextLabel3.TextWrapped = true
+
+ScreenGui3.Name = "ScreenGui3"
+ScreenGui3.Parent = game.CoreGui
+ScreenGui3.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+TextLabel4.Name = "TextLabel3"
+TextLabel4.Parent = ScreenGui2
+TextLabel4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel4.BackgroundTransparency = 1.000
+TextLabel4.Position = UDim2.new(-1.448, 0,0.255, 0)
+TextLabel4.Size = UDim2.new(0.51219511, 0, 0.28553617, 0)
+TextLabel4.Font = Enum.Font.SourceSans
+TextLabel4.Text = "正在加载..."
+TextLabel4.TextColor3 = Color3.fromRGB(255, 0, 0)
+TextLabel4.TextScaled = true
+TextLabel4.TextSize = 14.000
+TextLabel4.TextWrapped = true
+---------------------------------------
+
+wait(1)
+Frame:TweenPosition(UDim2.new(0.367, 0,0.065, 0), "InOut", "Quad", 1, true)
+wait(5)
+Frame:TweenPosition(UDim2.new(1.526, 0,0.065, 0), "InOut", "Quad", 1, true)
+wait(1)
+TextLabel3:TweenPosition(UDim2.new(0.231, 0,0.255, 0), "InOut", "Quad", 1, true)
+wait(2)
+TextLabel3:TweenPosition(UDim2.new(1.526, 0,0.255, 0), "InOut", "Quad", 2, true)
+wait(1)
+TextLabel4:TweenPosition(UDim2.new(0.231, 0,0.255, 0), "InOut", "Quad", 1, true)
+wait(2)
+TextLabel4:TweenPosition(UDim2.new(1.526, 0,0.255, 0), "InOut", "Quad", 1, true)
+wait(2)
+Frame:Destroy()
+TextLabel3:Destroy()
+TextLabel4:Destroy()
+
+loadstring(game:HttpGet("https://pastebin.com/raw/6xQ5gtbj"))();
+local ui = loadstring(game:HttpGet"https://pastebin.com/raw/tBpc3aSR")()
+local window = ui:new("老脚本")
+
+local GYTab1 = window:Tab("关于",'14904708387')
+local GYTab = GYTab1:section("作者",true)
+
+GYTab :Button("作者：之前", function()
+setclipboard("之前")
+end)
+
+local JCTab1 = window:Tab("基础功能",'14904708387')
+local JCTab = JCTab1:section("人物",true)
+
+JCTab :Slider('设置速度', 'Sliderflag', 16, 16, 900,false, function(s)
+game:GetService("RunService").RenderStepped:Connect(function()
+        pcall(function()
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+        end)
+    end)
+end)
+
+JCTab :Textbox("设置血量",'TextBoxfalg',"输入数字",function(s)	
+spawn(function()
+while task.wait() do
+game.Players.LocalPlayer.Character.Humanoid.Health = s
+end
+end)
+end)
+local Noclip = nil
+local Clip = nil
+
+function noclip()
+	Clip = false
+	local function Nocl()
+		if Clip == false and game.Players.LocalPlayer.Character ~= nil then
+			for _,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+				if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
+					v.CanCollide = false
+				end
+			end
+		end
+		wait(0.21) -- basic optimization
+	end
+	Noclip = game:GetService('RunService').Stepped:Connect(Nocl)
+end
+
+function clip()
+	if Noclip then Noclip:Disconnect() end
+	Clip = true
+end
+
+JCTab :Toggle("穿墙",'Toggleflag',false,function(s)
+if s then
+noclip()
+else
+clip()
+end
+end)
+
+JCTab :Button("飞行", function()
+	loadstring("\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\40\39\104\116\116\112\115\58\47\47\103\105\115\116\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\109\101\111\122\111\110\101\89\84\47\98\102\48\51\55\100\102\102\57\102\48\97\55\48\48\49\55\51\48\52\100\100\100\54\55\102\100\99\100\51\55\48\47\114\97\119\47\101\49\52\101\55\52\102\52\50\53\98\48\54\48\100\102\53\50\51\51\52\51\99\102\51\48\98\55\56\55\48\55\52\101\98\51\99\53\100\50\47\97\114\99\101\117\115\37\50\53\50\48\120\37\50\53\50\48\102\108\121\37\50\53\50\48\50\37\50\53\50\48\111\98\102\108\117\99\97\116\111\114\39\41\44\116\114\117\101\41\41\40\41\10\10")()
+end)
+
+local doorsTab1 = window:Tab("doors",'14904708387')
+local doorsTab = doorsTab1:section("主要功能",true)
+
+local KeyChams = {}
+doorsTab :Toggle("钥匙透视",'Toggleflag',false,function(s)
+	for i,v in pairs() do
+        v.Enabled = s
+    end
+   bai.keyesp=s
+end)
+
+
+local function ApplyKeyChams(inst)
+    wait()
+    local Cham = Instance.new("Highlight")
+    Cham.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+    Cham.FillColor = Color3.new(0,0,0)
+    Cham.FillTransparency = 0
+    Cham.OutlineColor = Color3.new(0,0,0)
+    Cham.Parent = inst
+    Cham.Adornee = inst
+    Cham.Enabled = bai.keyesp
+    Cham.RobloxLocked = true
+    return Cham
+end
+
+local KeyCoroutine = coroutine.create(function()
+    workspace.CurrentRooms.DescendantAdded:Connect(function(inst)
+        if inst.Name == "KeyObtain" then
+            table.insert(KeyChams,ApplyKeyChams(inst))
+        end
+    end)
+end)
+for i,v in ipairs(workspace:GetDescendants()) do
+    if v.Name == "KeyObtain" then
+        table.insert(KeyChams,ApplyKeyChams(v))
+    end
+end
+coroutine.resume(KeyCoroutine)
+
+local BookChams = {}
+doorsTab :Toggle("书透视",'Toggleflag',false,function(s)
+    for i,v in pairs(BookChams) do
+        v.Enabled =s
+    end
+bai.bookes=s
+end)
+
+
+local FigureChams = {}
+doorsTab :Toggle("图形透视",'Toggleflag',false,function(s)
+    for i,v in pairs(FigureChams) do
+        v.Enabled =s
+    end
+	bai.fuces=s
+end)
+
+
+local function ApplyBookChams(inst)
+    wait()
+    local Cham = Instance.new("Highlight")
+    Cham.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+    Cham.FillColor = Color3.new(0,0,0)
+    Cham.FillTransparency = 0
+    Cham.OutlineColor = Color3.new(0,0,0)
+    Cham.Parent = inst
+    Cham.Enabled = bai.bookes
+    Cham.Adornee = inst
+    Cham.RobloxLocked = true
+    return Cham
+end
+
+local function ApplyEntityChams(inst)
+    wait()
+    local Cham = Instance.new("Highlight")
+    Cham.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+    Cham.FillColor = Color3.new(0,0,0)
+    Cham.FillTransparency = 0
+    Cham.OutlineColor = Color3.new(0,0,0)
+    Cham.Parent = inst
+    Cham.Enabled =bai.fuces
+    Cham.Adornee = inst
+    Cham.RobloxLocked = true
+    return Cham
+end
+
+local BookCoroutine = coroutine.create(function()
+    for i,v in pairs(game:GetService("Workspace").CurrentRooms["50"].Assets:GetDescendants()) do
+        if v.Name == "LiveHintBook" then
+            table.insert(BookChams,ApplyBookChams(v))
+            
+        end
+    end
+end)
+local EntityCoroutine = coroutine.create(function()
+    local Entity = game:GetService("Workspace").CurrentRooms["50"].FigureSetup:WaitForChild("FigureRagdoll",5)
+    Entity:WaitForChild("Torso",2.5)
+    table.insert(FigureChams,ApplyEntityChams(Entity))
+end)
+
+
+
+
+
+local function applyLight(value)
+    if value then 
+        local light = Instance.new('PointLight', game.Players.LocalPlayer.Character.Head)
+        light.Name='bai'
+        light.Range = 150
+        light.Brightness = 1.7
+    else
+        pcall(function()
+            game.Players.LocalPlayerp.Character.Head.bai:remove();
+        end);
+    end;
+end;
+
+
+doorsTab :Toggle("头部发光",'Toggleflag',false,function(s)
+	applyLight(s)
+end)
+
+
+
+doorsTab :Toggle("即时交互",'Toggleflag',false,function(s)
+	bai.jishi=s
+end)
+
+
+
+
+game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(function(prompt)
+    if bai.jishi == true then
+        fireproximityprompt(prompt)
+    end
+end)
+doorsTab :Toggle("事件预测",'Toggleflag',false,function(s)
+	bai.yucezuizhu=s
+end)
+doorsTab :Toggle("当怪物出现时弹提升",'Toggleflag',false,function(s)
+	bai.yceguaiwu=s
+end)
+
+
+local NotificationCoroutine = coroutine.create(function()
+    LatestRoom.Changed:Connect(function()
+        spwan(function()
+        if bai.yucezuizhu == true then
+            local n = ChaseStart.Value - LatestRoom.Value
+            if 0 < n and n < 4 then
+                notify("注意!","事件发生在 " .. tostring(n) .. "房间",5)
+                
+            end
+        end
+        if bai.bookes == true then
+            if LatestRoom.Value == 50 then
+                coroutine.resume(BookCoroutine)
+            end
+        end
+        if bai.fuces == true then
+            if LatestRoom.Value == 50 then
+                coroutine.resume(EntityCoroutine)
+            end
+        end
+    end)
+    end)
+    end)
+    
+    workspace.ChildAdded:Connect(function(inst)
+        spawn(function()
+        if inst.Name == "RushMoving" and bai.yceguaiwu == true then
+            notify("警告!", "Rush已出现!藏起来!",7)
+
+        elseif inst.Name == "AmbushMoving" and bai.yceguaiwu == true then
+            notify("警告!", "Ambush!已出现藏起来!",7)
+         
+        end
+    end)
+end)
+
+doorsTab :Toggle("自动开门",'Toggleflag',false,function(s)
+	bai.zidongkaimen=s
+end)
+local AutoSkipCoro = coroutine.create(function()
+        while true do
+            task.wait()
+            pcall(function()
+            if bai.zidongkaimen == true and game:GetService("ReplicatedStorage").GameData.LatestRoom.Value < 100 then
+                local HasKey = false
+                local LatestRoom = game:GetService("ReplicatedStorage").GameData.LatestRoom.Value
+                local CurrentDoor = workspace.CurrentRooms[tostring(LatestRoom)]:WaitForChild("Door")
+                for i,v in ipairs(CurrentDoor.Parent:GetDescendants()) do
+                    if v.Name == "KeyObtain" then
+                        HasKey = v
+                    end
+                end
+                if HasKey then
+                    game.Players.LocalPlayer.Character:PivotTo(CF(HasKey.Hitbox.Position))
+                    task.wait(0.3)
+                    fireproximityprompt(HasKey.ModulePrompt,0)
+                    game.Players.LocalPlayer.Character:PivotTo(CF(CurrentDoor.Door.Position))
+                    task.wait(0.3)
+                    fireproximityprompt(CurrentDoor.Lock.UnlockPrompt,0)
+                end
+                if LatestRoom == 50 then
+                    CurrentDoor = workspace.CurrentRooms[tostring(LatestRoom+1)]:WaitForChild("Door")
+                end
+                game.Players.LocalPlayer.Character:PivotTo(CF(CurrentDoor.Door.Position))
+                task.wait(0.3)
+                CurrentDoor.ClientOpen:FireServer()
+            end
+        end)
+        end
+end)
+
+doorsTab :Button("一键通关beta", function()
+ notify("老","现在只需要通关此关即可开始使用",4)
+    game:GetService("Workspace").CurrentRooms.ChildAdded:Connect(function(s)
+        if s.Name=="51" then
+            notify("老","已进入第50关请你等待出场动画",4)
+            task.wait(12)
+        tp(s.RoomStart.CFrame)
+    s.Door.ClientOpen:FireServer()
+    s.Door.ClientOpen:FireServer()
+          task.wait(0.4)
+          tp(s.RoomEnd.CFrame)
+             s.Door.ClientOpen:FireServer()
+             s.Door.ClientOpen:FireServer()
+          elseif s.Name=="100" then
+            s.ChildAdded:Connect(function(d)
+                
+        task.wait(0.6)
+          tp(d.Door.Hidden.CFrame)
+      end)
+             else
+             task.wait(0.3)
+          tp(s.RoomStart.CFrame)
+                s.Door.ClientOpen:FireServer()
+                s.Door.ClientOpen:FireServer()
+                    s.Door.ClientOpen:FireServer()
+                s.Door.ClientOpen:FireServer()
+          task.wait(0.3)
+          tp(s.RoomEnd.CFrame)
+              s.Door.ClientOpen:FireServer()
+                s.Door.ClientOpen:FireServer()
+             s.Door.ClientOpen:FireServer() 
+             s.Door.ClientOpen:FireServer()
+      end
+              end)
+           end)
+
+local rcTab1 = window:Tab("rc",'14904708387')
+local rcTab = rcTab1:section("矿石功能",true)
+
+rcTab:Button("卖矿石",function()
+chuansongOres(game:GetService("Workspace").Map.Sellary.Counter.Base.CFrame)
+game.workspace.Map.Sellary.Keeper.IPart.Interact:FireServer()
+
+end)
+
+rcTab:Button("带来矿石",function()
+chuansongOres(lp.Character.HumanoidRootPart.CFrame)
+end)
+rcTab:Button("设置矿石传送点",function()
+pcall(function()
+workspace.baiBasedropCord:Destroy();
+bai.itemset=nil
+end)
+local baiBasedropCord = Instance.new("Part",game.Workspace)
+    baiBasedropCord.Name = 'baiBasedropCord'
+    baiBasedropCord.CanCollide = false
+    baiBasedropCord.Anchored = true
+    baiBasedropCord.Shape = Enum.PartType.Ball
+    baiBasedropCord.Color = Color3.fromRGB(0, 217, 255);
+    baiBasedropCord.Transparency = 0.5
+    baiBasedropCord.Size = Vector3.new(2, 2, 2)
+    baiBasedropCord.CFrame = lp.Character.HumanoidRootPart.CFrame
+    baiBasedropCord.Material = Enum.Material.Marble
+    bai.itemset=lp.Character.HumanoidRootPart.CFrame
+end)
+rcTab:Button("删除矿石传送点",function()
+pcall(function()
+workspace.baiBasedropCord:Destroy();
+bai.itemset=nil
+end)
+end)
+rcTab:Button("开始传送矿石",function()
+if bai.itemset==nil then
+return notify("老","请你放传送点",4)
+end
+local cf=bai.itemset
+chuansongOres(cf)
+end)
+rcTab:Button("停止传送矿石",function()
+bai.stoptp=false
+end)
+
+rcTab:Button("寻找紫树",function()
+local find=false
+	for _,v in pairs(game.Workspace:GetDescendants()) do
+		if v.Name == "Interact" and v.Parent.Name == "Leaf" then
+		    tp(v.Part.CFrame)
+		local BillboardGui = Instance.new("BillboardGui")
+		local TextLabel = Instance.new("TextLabel")
+		BillboardGui.Parent = v.Parent
+		BillboardGui.AlwaysOnTop = true
+		BillboardGui.LightInfluence = 1
+		BillboardGui.Size = UDim2.new(0, 50, 0, 50)
+		BillboardGui.StudsOffset = Vector3.new(0, 2, 0)
+		TextLabel.Parent = BillboardGui
+		TextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
+		TextLabel.BackgroundTransparency = 1
+		TextLabel.Size = UDim2.new(1, 0, 1, 0)
+		TextLabel.Text = "紫树在这里"
+		TextLabel.TextColor3 = Color3.new(1, 0, 0)
+		TextLabel.TextScaled = true
+		local find=true
+		end
+		end
+		if find==false then
+			notify("老","没有找到树",4)
+			else
+				notify("老","已找到树",4)
+			
+
+		end
+end)
+
+local rcTaba= rcTab1:section("其他功能",true)
+
+rcTaba:Toggle("自我发光", "ToggleInfo",false, function(s)
+	lg(s)
+end)
+rcTaba:Toggle("处理好后石头传送到当前位置", "ToggleInfo",false, function(state)
+	bai.chulistcs=state
+end)
+
+rcTaba:Button("处理矿石",function()
+  local tp=gsw()
+  chuansongOres(tp+Vector3.new(0,0.5, 0))
+  wait(1)
+  if bai.chulistcs==true then
+    chuansongOres(lp.Character.HumanoidRootPart.CFrame)
+  
+  end
+  end)
+rcTaba:Button("点击传送物品到家",function()
+
+local Tool = Instance.new("Tool", game:GetService("Players").LocalPlayer.Backpack)
+	Tool.Name = "点击你想要传送的物品"
+		Tool.RequiresHandle = false;
+		
+	Tool.Activated:connect(function()
+	
+		if lp:GetMouse().Target.Parent:FindFirstChild("Owner") then
+			if lp:GetMouse().Target.Parent.Owner.Value==lp then
+				
+					for i, v in next,lp:GetMouse().Target.Parent:children() do
+          if v.Name~="Configuration" or v.Name~="Link" or v.Name~="Shop" then
+           
+            game:GetService("ReplicatedStorage").Events.Ungrab:FireServer(v,{})
+            v.CFrame=GetPlot()
+game:GetService("ReplicatedStorage").Events.Ungrab:FireServer(v,{})
+          end
+        
+					
+				end
+			end
+				end
+	end)
+	Tool.Parent = game.Players.LocalPlayer.Backpack
+  
+  end)
+if a == 'yaozhengaii' then
+rcTaba:Button("大牛马专属功能",function()
+local Tool = Instance.new("Tool", game:GetService("Players").LocalPlayer.Backpack)
+	Tool.Name = "点击你想要传送的物品"
+		Tool.RequiresHandle = false;
+		
+	Tool.Activated:connect(function()
+	
+	if lp:GetMouse().Target.Parent:FindFirstChild("Owner") then
+	if lp:GetMouse().Target.Parent.Owner.Value==lp then
+				
+for i, v in next,lp:GetMouse().Target.Parent:children() do
+          if v.Name~="Configuration" or v.Name~="Link" or v.Name~="Shop" then
+           
+            game:GetService("ReplicatedStorage").Events.Ungrab:FireServer(v,{})
+            v.CFrame=bai.itemset
+game:GetService("ReplicatedStorage").Events.Ungrab:FireServer(v,{})
+          end
+        
+					
+				end
+			end
+			end
+	end)
+	Tool.Parent = game.Players.LocalPlayer.Backpack
+  
+  end)
+end
+rcTaba:Button("点击卖石头",function()
+
+local Tool = Instance.new("Tool", game:GetService("Players").LocalPlayer.Backpack)
+	Tool.Name = "点击你想要卖的石头"
+		Tool.RequiresHandle = false;
+		
+	Tool.Activated:connect(function()
+	
+		if lp:GetMouse().Target.Parent:FindFirstChild("Owner") then
+			if lp:GetMouse().Target.Parent.Owner.Value==lp then
+		if lp:GetMouse().Target.Parent:FindFirstChild("Part") and lp:GetMouse().Target.Parent.Name == "MaterialPart" then
+					
+game:GetService("ReplicatedStorage").Events.Ungrab:FireServer(lp:GetMouse().Target.Parent.Part,{})
+    lp:GetMouse().Target.Parent.Part.CFrame=game:GetService("Workspace").Map.Sellary.Counter.Base.CFrame
+game:GetService("ReplicatedStorage").Events.Ungrab:FireServer(lp:GetMouse().Target.Parent.Part,{})
+wait(0.2)
+game.workspace.Map.Sellary.Keeper.IPart.Interact:FireServer()
+      
+					
+				end
+			end
+				end
+	end)
+	Tool.Parent = game.Players.LocalPlayer.Backpack
+  
+  end)
+
+
+local SectionTab1 = window:Tab("力量传奇",'14904708387')
+local SectionTab = SectionTab1:section("锻炼功能",true)
+
+
+SectionTab:Toggle("自动举哑铃开关",'Toggleflag',false, function(state)
+    if Section.Text=="关"
+    then Section.Text="开"
+    else Section.Text="关"
+    end
+    if state then
+        local part = Instance.new('Part', workspace)
+        part.Size = Vector3.new(500, 20, 530.1)
+        part.Position = Vector3.new(0, 100000, 133.15)
+        part.CanCollide = true
+        part.Anchored = true
+        local rs = game:GetService("RunService").RenderStepped
+        while wait() do 
+        if Section.Text=="关" then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = part.CFrame + Vector3.new(0, 50, 0)
+        for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+        if v.ClassName == "Tool" and v.Name == "Weight" then
+        v.Parent = game.Players.LocalPlayer.Character
+        end
+        end
+        game:GetService("Players").LocalPlayer.muscleEvent:FireServer("rep")
+        end
+        end
+        end
+end)
+SectionTab:Toggle("自动俯卧撑开关",'Toggleflag',false, function(state)
+    if Section.Text=="关"
+    then Section.Text="开"
+    else Section.Text="关"
+    end
+    if state then
+        local part = Instance.new('Part', workspace)
+        part.Size = Vector3.new(500, 20, 530.1)
+        part.Position = Vector3.new(0, 100000, 133.15)
+        part.CanCollide = true
+        part.Anchored = true
+        local rs = game:GetService("RunService").RenderStepped
+        while wait() do 
+        if Section.Text=="关" then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = part.CFrame + Vector3.new(0, 50, 0)
+        
+        for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+            if v.ClassName == "Tool" and v.Name == "Pushups" then
+                v.Parent = game.Players.LocalPlayer.Character
+                end
+        end
+        game:GetService("Players").LocalPlayer.muscleEvent:FireServer("rep")
+        end
+        end
+        end 
+end)
+SectionTab:Toggle("自动仰卧起坐开关",'Toggleflag',false, function(state)
+    if Section.Text=="关"
+    then Section.Text="开"
+    else Section.Text="关"
+    end
+    if state then
+        local part = Instance.new('Part', workspace)
+        part.Size = Vector3.new(500, 20, 530.1)
+        part.Position = Vector3.new(0, 100000, 133.15)
+        part.CanCollide = true
+        part.Anchored = true
+        local rs = game:GetService("RunService").RenderStepped
+        while wait() do 
+        if Section.Text=="关" then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = part.CFrame + Vector3.new(0, 50, 0)
+        for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+            if v.ClassName == "Tool" and v.Name == "Situps" then
+                v.Parent = game.Players.LocalPlayer.Character
+                end
+                end
+        end
+        game:GetService("Players").LocalPlayer.muscleEvent:FireServer("rep")
+         end
+    end
+end)
+SectionTab:Toggle("自动倒立身体",'Toggleflag',false, function(state)
+    if Section.Text=="关"
+    then Section.Text="开"
+    else Section.Text="关"
+    end
+    if state then
+        local part = Instance.new('Part', workspace)
+    part.Size = Vector3.new(500, 20, 530.1)
+    part.Position = Vector3.new(0, 100000, 133.15)
+    part.CanCollide = true
+    part.Anchored = true
+    local rs = game:GetService("RunService").RenderStepped
+    while wait() do 
+    if Section.Text=="关" then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = part.CFrame + Vector3.new(0, 50, 0)
+    
+    for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+        if v.ClassName == "Tool" and v.Name == "Handstands" then
+            v.Parent = game.Players.LocalPlayer.Character
+            
+            end
+            end
+    end
+    game:GetService("Players").LocalPlayer.muscleEvent:FireServer("rep")
+    end
+    end
+    end)
+    SectionTab:Toggle("自动锻炼开关",'Toggleflag',false, function(state)
+        if Section.Text=="关"
+    then Section.Text="开"
+    else Section.Text="关"
+    end
+        if state then
+            local part = Instance.new('Part', workspace)
+    part.Size = Vector3.new(500, 20, 530.1)
+    part.Position = Vector3.new(0, 100000, 133.15)
+    part.CanCollide = true
+    part.Anchored = true
+
+    while wait() do 
+    if Section.Text=="关" then
+
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = part.CFrame + Vector3.new(0, 50, 0)
+		for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+			if
+				v.ClassName == "Tool" and v.Name == "Handstands" or v.Name == "Situps" or v.Name == "Pushups" or
+					v.Name == "Weight"
+			 then
+				v:FindFirstChildOfClass("NumberValue").Value = 0
+				repeat
+					wait()
+				until game.Players.LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
+				game.Players.LocalPlayer.Character:WaitForChild("Humanoid"):EquipTool(v)
+				game:GetService("Players").LocalPlayer.muscleEvent:FireServer("rep")
+
+end
+end
+end
+end
+          end
+    end)
+    SectionTab:Toggle("自动重生开关",'Toggleflag',false, function(state)
+        if SectionTab.Text=="关"
+then Section.Text="开"
+else Section.Text="关"
+end
+        if state then
+            while wait() do 
+                if Section.Text=="关" then
+                    game:GetService("ReplicatedStorage").rEvents.rebirthRemote:InvokeServer("rebirthRequest")
+                
+                end
+                end                
+        end
+    end)
+    SectionTab:Button("收集宝石",function()
+        jk = {}
+for _, v in pairs(game:GetService("ReplicatedStorage").chestRewards:GetDescendants()) do
+    if v.Name ~= "Light Karma Chest" or v.Name ~= "Evil Karma Chest" then
+        table.insert(jk, v.Name)
+    end
+end
+for i = 1, #jk do
+    wait(2)
+    game:GetService("ReplicatedStorage").rEvents.checkChestRemote:InvokeServer(jk[i])
+end
+    end)
+    SectionTab:Toggle("自动比赛开关",'Toggleflag',false, function(state)
+        if Section.Text=="关"
+then Section.Text="开"
+else Section.Text="关"
+    end
+        if state  then
+            while wait() do 
+                if Section.Text=="自动加入战斗（开）" then
+            wait(2)
+            game:GetService("ReplicatedStorage").rEvents.brawlEvent:FireServer("joinBrawl")
+                end
+                end
+        end
+    end)
+
+
+local RTaba1 = window:Tab("忍者传奇",'14904708387')
+local RTaba = RTaba1:section("自动功能",true)
+
+RTaba:Toggle("自动挥刀",'Toggleflag',false, function(state)
+    if state then
+       bai.antohuidao=true
+       while wait() do
+       if bai.antohuidao==true
+       then
+       
+        if game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart") then
+            if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then 
+                game.Players.LocalPlayer.ninjaEvent:FireServer("swingKatana")
+            else
+                for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do 
+                    if v.ClassName == "Tool" and v:FindFirstChild("attackShurikenScript") then 
+                        game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+					end
+                        if v.ClassName == "Tool" and v:FindFirstChild("attackKatanaScript") then 
+                            game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)                            
+                        end
+                end
+            end
+        end
+        
+            
+        end
+       end
+    else
+        bai.antohuidao=false
+    end
+end)
+RTaba:Toggle("自动买刀",'Toggleflag',false, function(state)
+    if state then
+        bai.automaidao=true
+        while  wait(0.5) do 
+            if bai.automaidao==true then
+                if game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart") then
+					local oh1 = "buyAllSwords"
+					local oh2 = {"Ground", "Astral Island", "Space Island","Tundra Island", "Eternal Island", "Sandstorm", "Thunderstorm", "Ancient Inferno Island", "Midnight Shadow Island", "Mythical Souls Island", "Winter Wonder Island"}
+					for i = 1,#oh2 do
+						game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(oh1, oh2[i])
+					end
+				end   
+        end
+        
+            
+        end
+    else
+        bai.automaidao=false
+    end
+end)
+RTaba:Toggle("自动卖气",'Toggleflag',false, function(state)
+    if state then
+        bai.kuaisumaiqi=true
+        while task.wait() do
+            if bai.kuaisumaiqi==true then
+                if game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart") then
+					game.workspace.sellAreaCircles["sellAreaCircle16"].circleInner.CFrame = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame
+					wait(.1)
+					game.workspace.sellAreaCircles["sellAreaCircle16"].circleInner.CFrame = game.Workspace.Part.CFrame
+				end
+            end
+        end
+    else
+     bai.kuaisumaiqi=false
+    end
+end)
+RTaba:Toggle("自动买背包",'Toggleflag',false, function(state)
+    if state then
+        bai.kuaisumaibao=true
+        while task.wait() do
+            if bai.kuaisumaibao==true then
+                if game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart") then
+					local oh1 = "buyAllBelts"
+					local oh2 = {"Ground", "Astral Island", "Space Island","Tundra Island", "Eternal Island", "Sandstorm", "Thunderstorm", "Ancient Inferno Island", "Midnight Shadow Island", "Mythical Souls Island", "Winter Wonder Island"}
+					for i = 1,#oh2 do
+						game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(oh1, oh2[i])
+					end
+				end
+            end
+        end
+    else
+     bai.kuaisumaibao=false
+    end
+end)
+RTaba:Toggle("自动吸气",'Toggleflag',false, function(state)
+    if state then
+       bai.zidonxiqi=true
+       while task.wait() do
+        if bai.zidonxiqi==true then
+            for i,v in pairs(game.Workspace.spawnedCoins.Valley:GetChildren()) do
+                if v.Name == "Blue Chi Crate" then 
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Position)
+                    wait()
+                end
+            end
+        end
+
+       end
+    else
+        bai.zidonxiqi=false
+    end
+end)
+RTaba:Toggle("自动买等级",'Toggleflag',false, function(state)
+    if state then
+      bai.autobuyranks=true
+      while wait(0.5) do
+        if bai.autobuyranks==true then
+            
+        
+        if game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart") then
+            local oh1 = "buyRank"
+            local oh2 = game:GetService("ReplicatedStorage").Ranks.Ground:GetChildren()
+            for i = 1,#oh2 do
+            game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(oh1, oh2[i].Name)
+            end
+        end
+    end
+      end
+    else
+      bai.autobuyranks=false
+    end
+end)
+RTaba:Toggle("自动买技能",'Toggleflag',false, function(state)
+    if state then
+     bai.autobuuyjineng=true
+     while wait(0.5) do
+        
+        if bai.autobuuyjineng==true then
+            if game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart") then
+                local oh1 = "buyAllSkills"
+                local oh2 = {"Ground", "Astral Island", "Space Island","Tundra Island", "Eternal Island", "Sandstorm", "Thunderstorm", "Ancient Inferno Island", "Midnight Shadow Island", "Mythical Souls Island", "Winter Wonder Island"}
+                for i = 1,#oh2 do
+                game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(oh1, oh2[i])
+                end
+                end
+                end
+        
+     end
+    else
+        bai.autobuuyjineng=false
+    end
+end)
+
+local RTaba = RTaba1:section("其他功能",true)
+
+RTaba:Button("最大跳跃", function()
+    game.Players.LocalPlayer.multiJumpCount.Value = "50"
+end)
+RTaba:Button("解锁所有岛屿",function()
+    for i,v in next, game.workspace.islandUnlockParts:GetChildren() do 
+        if v then 
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.islandSignPart.CFrame -Vector3.new(0,80, 0)
+           wait(0.5)
+        end
+    end
+end)
+RTaba:Button("收集所有宝箱",function()
+    game:GetService("Workspace").mythicalChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+		wait(3.5)
+		game:GetService("Workspace").goldenChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+		wait(3.5)
+		game:GetService("Workspace").enchantedChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+		wait(3.5)
+		game:GetService("Workspace").magmaChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+		wait(3.5)
+		game:GetService("Workspace").legendsChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+		wait(3.5)
+		game:GetService("Workspace").eternalChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+		wait(3.5)
+		game:GetService("Workspace").saharaChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+		wait(3.5)
+		game:GetService("Workspace").thunderChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+		wait(3.5)
+		game:GetService("Workspace").ancientChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+		wait(3.5)
+		game:GetService("Workspace").midnightShadowChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+		wait(3.5)
+		game:GetService("Workspace").groupRewardsCircle["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+		wait(3.5)
+		game:GetService("Workspace")["Daily Chest"].circleInner.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+		wait(3.5)
+		game:GetService("Workspace")["wonderChest"].circleInner.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+		wait(3.5)
+		game:GetService("Workspace").wonderChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+		game:GetService("Workspace").midnightShadowChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+		game:GetService("Workspace").ancientChest["circleInner"].CFrame = game.Workspace.Part.CFrame
+		game:GetService("Workspace").midnightShadowChest["circleInner"].CFrame = game.Workspace.Part.CFrame
+		game:GetService("Workspace").thunderChest["circleInner"].CFrame = game.Workspace.Part.CFrame
+		game:GetService("Workspace").saharaChest["circleInner"].CFrame = game.Workspace.Part.CFrame
+		game:GetService("Workspace").eternalChest["circleInner"].CFrame = game.Workspace.Part.CFrame
+		game:GetService("Workspace").legendsChest["circleInner"].CFrame = game.Workspace.Part.CFrame
+		game:GetService("Workspace").magmaChest["circleInner"].CFrame = game.Workspace.Part.CFrame
+		game:GetService("Workspace").enchantedChest["circleInner"].CFrame = game.Workspace.Part.CFrame
+		game:GetService("Workspace").goldenChest["circleInner"].CFrame = game.Workspace.Part.CFrame
+		game:GetService("Workspace").mythicalChest["circleInner"].CFrame = game.Workspace.Part.CFrame
+		game:GetService("Workspace").groupRewardsCircle["circleInner"].CFrame = game.Workspace.Part.CFrame
+		game:GetService("Workspace")["Daily Chest"].circleInner.CFrame = game.Workspace.Part.CFrame
+end)
+RTaba:Button("杀死所有人",function()
+               for i,v in pairs(game.Players:GetChildren()) do
+            	if v.Name~=game.Players.LocalPlayer then
+            		 for i=1,50 do
+            		 	            		    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=v.Character.HumanoidRootPart.CFrame+ Vector3.new(0, .4, 2)
+            		 	
+            		 		task.wait()
+            		  if game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart") then
+            if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then 
+                game.Players.LocalPlayer.ninjaEvent:FireServer("swingKatana")
+            else
+                for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do 
+                    if v.ClassName == "Tool" and v:FindFirstChild("attackShurikenScript") then 
+                        game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+					end
+                        if v.ClassName == "Tool" and v:FindFirstChild("attackKatanaScript") then 
+                            game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)                            
+                        end
+                end
+               end
+     
+        
+            
+       
+				end
+			end
+		end
+	
+			
+			end
+   
+end)
+
+
+local YTab1 = window:Tab("一路向西",'14904708387')
+local YTab = YTab1:section("玩家功能",true)
+
+YTab:Textbox("速度",'TextBoxfalg',"提升速度",function(txt)
+	spawn(function()
+	  while task.wait(.01) do
+		Nax.me.Character.Humanoid.WalkSpeed = txt
+	  end
+  end)
+  end)
+YTab:Textbox("跳跃提升",'TextBoxfalg',"提升跳跃", function(txt)
+	spawn(function()
+	  while task.wait(.01) do
+		Nax.me.Character.Humanoid.JumpPower = txt
+	  end
+  end)
+  end)
+YTab:Toggle("穿墙",'Toggleflag',false, function(state)
+	Nax.Boolean.Noclip = state
+	Nax:Noclip()
+  end)
+YTab:Button("解锁最大焦距",function()
+	Nax.me.CameraMaxZoomDistance = 9e9
+  end)
+  
+  
+  end)
+end
+local myTitle = "老脚本协议条款" 
+CreateGUI(myTitle)
+
+  
