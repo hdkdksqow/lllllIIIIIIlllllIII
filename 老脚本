@@ -1232,7 +1232,112 @@ YTab:Toggle("穿墙",'Toggleflag',false, function(state)
 YTab:Button("解锁最大焦距",function()
 	Nax.me.CameraMaxZoomDistance = 9e9
   end)
+
   
+  local YTaba= YTab1:section("枪支功能",true)
+
+  YTaba:Button("超级枪",function()
+	for i,Guns in next,Nax.Setting['GunStats'] do
+		  Guns.Damage = math.huge;
+		  Guns.camShakeResist = math.huge;
+		  Guns.prepTime = .01;
+		  Guns.equipTime = .01;
+		  Guns.MaxShots = math.huge;
+		  Guns.ReloadAnimationSpeed = .01;
+		  Guns.ReloadSpeed = .00000001;
+		  Guns.ZoomAccuracy = math.huge; 
+		  Guns.EquipDelay = .01;
+		  end
+  end)
+YTaba:Textbox("放大的大小",'TextBoxfalg',"自定义放大的大小",function(txt)
+	  bai.jiuli=txt
+  end)
+  
+YTaba:Button("放大别人的身体",function(state)
+
+  game:GetService('RunService').RenderStepped:connect(function()
+	if _G.Disabled then
+	for i,v in next, game:GetService('Players'):GetPlayers() do
+	if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+	pcall(function()
+	v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+	v.Character.HumanoidRootPart.Transparency = 0.7
+	v.Character.HumanoidRootPart.BrickColor = BrickColor.new("Really blue")
+	v.Character.HumanoidRootPart.Material = "Neon"
+	v.Character.HumanoidRootPart.CanCollide = false
+	end)
+	end
+	end
+	end
+	end)
+  
+  end)
+YTaba:Button("透视",function()
+	Nax['Esp'] = Instance.new("BillboardGui",game.CoreGui)
+	Nax['EspLable'] = Instance.new("TextLabel", Nax['Esp'])
+	Nax['Esp'].ResetOnSpawn = false;
+	Nax['Esp'].AlwaysOnTop = true;
+	Nax['Esp'].LightInfluence = 0;
+	Nax['Esp'].Size = UDim2.new(1.75, 0, 1.75, 0);
+	Nax['EspLable'].Text = "";
+	Nax['EspLable'].Size = UDim2.new(0.0001, 0.00001, 0.0001, 0.00001);
+	Nax['EspLable'].BorderColor3 = Nax['Color'].White;
+	Nax['EspLable'].TextSize = 20;
+	Nax['EspLable'].TextColor3 = Nax['Color'].White;
+	Nax.Remote.RunService.RenderStepped:Connect(function()
+		for i, v in next, Nax.gs 'Players':GetPlayers() do
+			if v ~= Nax.me then
+				Nax['EspLable'].Text = "玩家用户名 : " .. tostring(v.Name)
+			end
+		end
+	end)
+  
+  end)
+YTaba:Toggle("终日白天",'Toggleflag',false, function(state)
+	  if state then 
+		  bai.awaysday=true
+		  while task.wait() do
+		  if bai.awaysday==true then 
+			  game:GetService('Lighting').TimeOfDay=('12:00:00');
+		  end
+	  end
+  else bai.awaysday=false
+	  end
+	  
+  end)
+YTaba:Toggle("终日黑天",'Toggleflag',false,  function(state)
+	  if state then 
+		  bai.awaysdnight=true
+		  while task.wait() do
+		  if bai.awaysdnight==true then 
+			  game:GetService('Lighting').TimeOfDay=('2:00:00');
+		  end
+	  end
+	  else
+		  bai.awaysdnight=false
+	  end
+end)
+
+local Players = YTaba:Dropdown("选择玩家名字已开始下面的功能",'Dropdown',bai.dropdown,function(v)
+    bai.playernamedied = v
+end)
+
+YTaba:Button("重置玩家名字", function()
+	shuaxinlb(true)
+	Players:SetOptions(bai.dropdown)
+end)
+
+YTaba:Button("传送到玩家旁边",function()
+    local HumRoot = game.Players.LocalPlayer.Character.HumanoidRootPart
+    local tp_player = game:GetService("Players")[bai.playernamedied]
+    if tp_player then
+        for i = 1,5 do
+            wait()
+            HumRoot.CFrame = tp_player.Character.HumanoidRootPart.CFrame + Vector3.new(0, 3, 0)
+        end
+    end
+end)
+
   
   end)
 end
